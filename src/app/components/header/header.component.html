@@ -1,0 +1,20 @@
+<mat-toolbar class="header mat-elevation-z4 justify-content-between">
+    <span>
+        <a routerLink="/">
+            <img class="logo" src="assets/img/logo.png" alt="logo" />
+        </a>
+    </span>
+
+    <div class="title-group d-flex">
+        <a routerLink="/login">
+            <i class="material-icons text-dark icon-navbar">account_circle</i>
+        </a>
+
+        <a routerLink="/cart">
+            <span matBadge="!" matBadgeOverlap="false" matBadgeColor="warn" matBadgeSize="medium">
+                <i class="material-icons text-dark icon-navbar">shopping_cart</i>
+            </span>
+        </a>
+
+    </div>
+</mat-toolbar>

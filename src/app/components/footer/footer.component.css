@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body {
+    line-height: 1.5;
+    font-family: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+.footer {
+    display: table;
+    justify-content: center;
+    align-items: center;
+    padding: 1vh;
+    bottom: 0;
+    position: relative;
+    background-color: #191C20;
+}
+
+h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+
+h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #16B94F;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+ul li a {
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+ul li a:hover {
+    color: #ffffff;
+    padding-left: 4px;
+}
+
+.social-links a {
+    display: inline-block;
+    transition: all 0.5s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.1);
+}
+
+.emoji {
+    max-width: 12px;
+}
+
+.cartoes {
+    max-width: 160px;
+}
+
+.iconRedeSocial {
+    max-width: 30px;
+    margin-right: 10px;
+}

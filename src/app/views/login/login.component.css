@@ -1,0 +1,7 @@
+.centralizar_tudo {
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    display: block;
+}
