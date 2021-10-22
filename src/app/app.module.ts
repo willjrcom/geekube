@@ -20,6 +20,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CartComponent } from './views/cart/cart.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { ViewCenterComponent } from './components/view-center/view-center.component';
+import { RegisterUserComponent } from './views/register-user/register-user.component';
+import { ProductComponent } from './views/product/product.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { MatSelectModule } from '@angular/material/select';
     FooterComponent,
     IndexComponent,
     LoginComponent,
-    CartComponent
+    CartComponent,
+    ViewCenterComponent,
+    RegisterUserComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,61 @@
+<mat-sidenav-container class="container bg-light">
+    <mat-sidenav-content class="bg-light text-dark">
+        <br>
+        <div class="row p-4">
+            <div class="col-md-5"><img class="img-thumbnail rounded" [src]="imagem" alt="Camisa" /></div>
+            <div class="col-md-6">
+                <h2>{{ nome }}</h2>
+                <label class="text-success">R$ {{ preco }}</label>
+                <br><br>
+                <label><fa-icon [icon]="cartao"></fa-icon> Em até 3 vezes no cartão</label>
+                <hr><br>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Tamanho</b></label>
+                        <select class="form-control" ngModel="tamanho">
+                            <option value="p">P</option>
+                            <option value="m">M</option>
+                            <option value="g">G</option>
+                            <option value="gg">GG</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label><b>Modelo</b></label>
+                        <select class="form-control" ngModel="modelo">
+                            <option value="masculino">Masculino</option>
+                            <option value="feminino">Feminimo</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label><b>Quantidade</b></label>
+                        <select class="form-control" ngModel="quantidade">
+                            <option value="masculino">Masculino</option>
+                            <option value="feminino">Feminimo</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div>&nbsp;</div>
+                        <button class="btn btn-success">Adicionar ao carrinho</button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+
+        <div class="row p-4">
+            <div class="col-md-6">
+                <label class="h5">O que vem no box?</label>
+                <p>Essa edição limitada de SETEMBRO irá conter 2 itens. As estampas dos mesmos irão variar de acordo com o tema escolhido pelo cliente no momento da compra.</p>
+            </div>
+
+            <div class="col-md-6">
+                <label class="h5">Até quando estará disponível?</label>
+                <p>O Box especial de SETEMBRO estará disponivel apenas até o dia 20 de SETEMBRO e não poderá ser adquirido após data. (Box adquirido após o dia de vencimento informado poderá ser cancelado e estornado o pagamento sem aviso prévio)</p>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

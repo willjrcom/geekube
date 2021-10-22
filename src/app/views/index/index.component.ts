@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
+  gotToBox(n: any): void {
+    window.location.href = "/product?box=" + n;
+  }
+
   constructor() { }
 
   ngOnInit(): void {

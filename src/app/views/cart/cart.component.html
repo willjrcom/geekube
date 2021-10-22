@@ -1,69 +1,71 @@
 <mat-sidenav-container class="container bg-light">
-    <mat-sidenav-content class="bg-light text-dark">
-        <br>
+    <mat-sidenav-content class="bg-light text-dark p-4">
         <div class="row">
-            <div class="col-md-5"><img class="img-thumbnail rounded" [src]="imagem" alt="Camisa" /></div>
-            <div class="col-md-6">
-                <h2>{{ nome }}</h2>
-                <label class="text-success">R$ {{ preco }}</label>
-                <br><br>
-                <label><fa-icon [icon]="cartao"></fa-icon> Em até 3 vezes no cartão</label>
-                <hr><br>
+            <div class="col-md-8 border-end border-2">
+                <h3>Carrinho</h3>
+                <hr>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Tamanho</mat-label>
-                            <mat-select>
-                                <mat-option value="p">P</mat-option>
-                                <mat-option value="m">M</mat-option>
-                                <mat-option value="g">G</mat-option>
-                                <mat-option value="gg">GG</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Qtd</th>
+                            <th>Modelo</th>
+                            <th>Tamanho</th>
+                            <th>Preço</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Box básica</td>
+                            <td>1</td>
+                            <td>Masculino</td>
+                            <td>GG</td>
+                            <td>R$ 50.90</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <h4>Resumo do pedido</h4>
+                <hr>
+                <div class="p-2">
+                    <div class="col-md-12 border rounded p-2 row div-block">
+                        <div class="col">
+                            <label><b>Endereço de entrega</b></label>
+                        </div>
+                        <div align="right" class="col">
+                            <button class="btn btn-sm btn-link" (click)="alterarEndereco()">Alterar</button>
+                        </div>
+                        <p>{{ endereco }}</p>
                     </div>
+                    <br>
 
-                    <div class="col-md-6">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Modelo</mat-label>
-                            <mat-select>
-                                <mat-option value="masculino">Masculino</mat-option>
-                                <mat-option value="feminino">Feminimo</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-
-                    <div class="col-md-6">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Quantidade</mat-label>
-                            <mat-select>
-                                <mat-option value="1">1</mat-option>
-                                <mat-option value="2">2</mat-option>
-                                <mat-option value="3">3</mat-option>
-                                <mat-option value="4">4</mat-option>
-                                <mat-option value="5">5</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-
-                    <div class="col-md-6">
-                        <button class="btn btn-success">Adicionar ao carrinho</button>
+                    <div class="col-md-12 border rounded p-2 row div-block">
+                        <div class="col">
+                            <label><b>Forma de pagamento</b></label>
+                        </div>
+                        <div align="right" class="col">
+                            <button class="btn btn-sm btn-link" (click)="alterarPagamento()">Alterar</button>
+                        </div>
+                        <p>{{ endereco }}</p>
                     </div>
                 </div>
+                <hr>
                 <br>
+
+                <label><b>Quantidade de itens:</b> {{ qtd_total }}</label>
+                <br>
+                <label><b>Total do pedido:</b> R$ {{ total_pedido }}</label>
+                <br><br>
+
+                <input type="checkbox" id="concordar" class="form-check-input" />
+                <small> Ao fazer seu pedido, você concorda com as Condições de Uso da Geekube.</small>
+                <br>
+                <button class="btn btn-warning form-control" (click)="finalizarPedido()">Finalizar pedido</button>
+
             </div>
         </div>
 
-        <div class="row p-4">
-            <div class="col-md-6">
-                <label class="h5">O que vem no box?</label>
-                <p>Essa edição limitada de SETEMBRO irá conter 2 itens. As estampas dos mesmos irão variar de acordo com o tema escolhido pelo cliente no momento da compra.</p>
-            </div>
-
-            <div class="col-md-6">
-                <label class="h5">Até quando estará disponível?</label>
-                <p>O Box especial de SETEMBRO estará disponivel apenas até o dia 20 de SETEMBRO e não poderá ser adquirido após data. (Box adquirido após o dia de vencimento informado poderá ser cancelado e estornado o pagamento sem aviso prévio)</p>
-            </div>
-        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

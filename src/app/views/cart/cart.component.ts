@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { faIdCard } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-cart',
@@ -7,15 +6,26 @@ import { faIdCard } from '@fortawesome/free-solid-svg-icons'
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  qtd_total = 5;
+  total_pedido = 60.99
+  endereco = "...";
 
-  nome = "Box Básica";
-  preco = "67.90";
-  imagem = "/assets/img/camisas_geek.jpg";
-  cartao = faIdCard
+  alterarEndereco() {
+    prompt("Endereço");
+  }
 
+  alterarPagamento() {
+    prompt("Pagamento");
+  }
+
+  finalizarPedido() {
+    confirm("Deseja finalizar seu pedido?");
+  }
+  
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }
