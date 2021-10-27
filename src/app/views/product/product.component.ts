@@ -8,9 +8,15 @@ import * as $ from 'jquery';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  nome = "...";
-  preco = "00.00";
-  imagem = "/assets/img/perfil.png";;
+  product = {
+    id: this.generateSerial(),
+    nome: "...",
+    preco: "00.00",
+    imagem: "/assets/img/perfil.png",
+    modelo: "",
+    quantidade: 1,
+    tamanho: ""
+  }
   cartao = faIdCard
 
   getParameterByName(name: any, url = window.location.href) {
@@ -41,19 +47,64 @@ export class ProductComponent implements OnInit {
       .catch(error => alert("Erro na requisição: " + error));
   }
 
+  addCart(){
+    let cart = [];
+    console.log(this.product);
+
+    if (this.product.nome == "..."
+        || this.product.preco == "00.00"
+        || this.product.modelo == ""
+        || this.product.quantidade == null
+        || this.product.quantidade < 1
+        || this.product.tamanho == ""){
+      alert("Opção invalida!")
+      return;
+    }
+
+    let alertIcon = document.getElementById("alert-icon")
+    if(alertIcon){
+      alertIcon.classList.add("mat-badge")
+    }
+
+    let localCart = window.localStorage.getItem('cart');
+
+    // Parse to obj
+    if(localCart){
+      cart = JSON.parse(localCart);
+    }
+    cart.push(this.product)
+    window.localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  generateSerial() {
+    'use strict';
+    
+    let chars = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let serialLength = 10;
+    let randomSerial = "";
+    let i;
+    let randomNumber;
+    
+    for (i = 0; i < serialLength; i = i + 1) {
+        randomNumber = Math.floor(Math.random() * chars.length);
+        randomSerial += chars.substring(randomNumber, randomNumber + 1);
+    }
+
+    return randomSerial;
+  }
   constructor() { }
 
   ngOnInit(): void {
     const n = this.getParameterByName('box');
     var data = this.getBox(n).then(response => {
       console.log(response);
-      this.nome = response["nome"]
-      this.preco = response["preco"]
+      this.product.nome = response["nome"]
+      this.product.preco = response["preco"]
       if(response["img"] == '0'){
-        this.imagem = "/assets/img/perfil.png";
+        this.product.imagem = "/assets/img/perfil.png";
       }
       else{
-        this.imagem = response["img"]
+        this.product.imagem = response["img"]
       }
     });
     
