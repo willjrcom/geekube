@@ -6,7 +6,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register-user.component.css']
 })
 export class RegisterUserComponent implements OnInit {
+  nome = "";
+  usuario = "";
+  senha = "";
 
+  criarUsuario() {
+    let novoUsuario = {
+      id: null,
+      nome: this.nome,
+      usuario: this.usuario,
+      senha: this.senha
+    }
+
+    fetch(`http://localhost:3001/users`, { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(novoUsuario)
+      })
+      .then(response => response.json())
+      .then(data => window.location.href="/center")
+      .catch(error => alert("Erro na requisição: " + error));
+  }
   constructor() { }
 
   ngOnInit(): void {

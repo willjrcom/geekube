@@ -18,8 +18,6 @@ export class LoginComponent implements OnInit {
         window.location.href= "/";
       })
       .catch(error => alert("Erro na requisição: " + error));
-
-    
   }
 
   constructor() { }

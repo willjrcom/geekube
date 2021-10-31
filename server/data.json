@@ -21,6 +21,7 @@
         }
     ],
     "users": [{
+        "id": 1,
         "nome": "Administrador",
         "usuario": "admin",
         "senha": "admin"
