@@ -4,18 +4,18 @@
 
     <div>
         <label>Usuário</label>
-        <input [value]="user" class="form-control" />
+        <input [(ngModel)]="user" class="form-control" />
     </div>
     <br>
 
     <div>
         <label>Senha</label>
-        <input [value]="password" class="form-control" />
+        <input [(ngModel)]="password" class="form-control" />
     </div>
     <br>
 
     <div class="row p-4">
-        <div class="col-md-6"><a routerLink="/"><button class="btn btn-success">Entrar</button></a></div>
+        <div class="col-md-6"><button class="btn btn-success" (click)="fazerLogin()">Entrar</button></div>
         <div class="col-md-6"><a routerLink="/center/register"><button class="btn btn-success">Cadastrar</button></a></div>
     </div>
 </div>

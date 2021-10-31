@@ -19,5 +19,10 @@
             "preco": "109.99",
             "img": "0"
         }
-    ]
+    ],
+    "users": [{
+        "nome": "Administrador",
+        "usuario": "admin",
+        "senha": "admin"
+    }]
 }
