@@ -9,13 +9,15 @@ export class RegisterUserComponent implements OnInit {
   nome = "";
   usuario = "";
   senha = "";
+  endereco = "";
 
   criarUsuario() {
     let novoUsuario = {
       id: null,
       nome: this.nome,
       usuario: this.usuario,
-      senha: this.senha
+      senha: this.senha,
+      endereco: this.endereco
     }
 
     fetch(`http://localhost:3001/users`, { 

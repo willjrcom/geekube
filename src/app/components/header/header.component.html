@@ -6,15 +6,21 @@
     </span>
 
     <div class="title-group d-flex">
-        <a routerLink="/center">
-            <i class="material-icons text-dark icon-navbar">account_circle</i>
-        </a>
-
-        <a routerLink="/cart">
-            <span id="alert-icon" matBadge="!" matBadgeOverlap="false" matBadgeColor="warn" matBadgeSize="medium">
+        <a routerLink="/cart" class="m-3" *ngIf="auth">
+            <span id="alert-icon" *ngIf="!mostrarNotificacao">
+                <i class="material-icons text-dark icon-navbar">shopping_cart</i>
+            </span>
+            <span id="alert-icon" *ngIf="mostrarNotificacao" matBadge="!" matBadgeOverlap="false" matBadgeColor="warn" matBadgeSize="medium">
                 <i class="material-icons text-dark icon-navbar">shopping_cart</i>
             </span>
         </a>
+        <a routerLink="/center" class="m-2" *ngIf="!auth">
+            <i class="material-icons text-dark icon-navbar">account_circle</i>
+        </a>
+        <a routerLink="/center/edit" class="m-2" *ngIf="auth">
+            <i class="material-icons text-dark icon-navbar">edit</i>
+        </a>
 
+        <a *ngIf="auth" class="btn btn-link" (click)="logout()"><i class="material-icons text-dark">logout</i></a>
     </div>
 </mat-toolbar>

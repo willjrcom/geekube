@@ -1,3 +1,4 @@
+import { EditUserComponent } from './views/edit-user/edit-user.component';
 import { ProductComponent } from './views/product/product.component';
 import { RegisterUserComponent } from './views/register-user/register-user.component';
 import { ViewCenterComponent } from './components/view-center/view-center.component';
@@ -25,7 +26,12 @@ const routes: Routes = [
     {
       path: 'register', 
       component: RegisterUserComponent
-    }]
+    },
+    {
+      path: 'edit',
+      component: EditUserComponent
+    }
+  ]
   },
 {
   path: 'product',

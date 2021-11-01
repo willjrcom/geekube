@@ -9,9 +9,10 @@ import * as $ from 'jquery';
 })
 export class ProductComponent implements OnInit {
   product = {
-    id: this.generateSerial(),
+    id: '',
     nome: "...",
     preco: "00.00",
+    descricao: "",
     imagem: "/assets/img/perfil.png",
     modelo: "",
     quantidade: 1,
@@ -49,7 +50,6 @@ export class ProductComponent implements OnInit {
 
   addCart(){
     let cart = [];
-    console.log(this.product);
 
     if (this.product.nome == "..."
         || this.product.preco == "00.00"
@@ -60,6 +60,8 @@ export class ProductComponent implements OnInit {
       alert("Opção invalida!")
       return;
     }
+
+    this.product.id = this.generateSerial();
 
     let alertIcon = document.getElementById("alert-icon")
     if(alertIcon){
@@ -74,6 +76,7 @@ export class ProductComponent implements OnInit {
     }
     cart.push(this.product)
     window.localStorage.setItem('cart', JSON.stringify(cart));
+    window.location.href = "/";
   }
 
   generateSerial() {
@@ -100,6 +103,7 @@ export class ProductComponent implements OnInit {
       console.log(response);
       this.product.nome = response["nome"]
       this.product.preco = response["preco"]
+      this.product.descricao = response["descricao"]
       if(response["img"] == '0'){
         this.product.imagem = "/assets/img/perfil.png";
       }

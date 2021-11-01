@@ -8,20 +8,35 @@ import * as $ from 'jquery';
 })
 export class HeaderComponent implements OnInit {
 
+  mostrarNotificacao = false;
+  auth = function() {
+    const autenticado = window.localStorage.getItem('auth');
+    if(!autenticado){
+      return false;
+    }
+    return true;
+  }()
+
+  logout() {
+    window.localStorage.removeItem('auth');
+    window.location.href = "/center";
+  }
+
+  notificacao(cart: any) {
+    if(cart.length == 0){
+      this.mostrarNotificacao = false
+    }else{
+      this.mostrarNotificacao = true
+    }
+  }
+
   constructor() { }
 
   ngOnInit(): void {
-    let alertIcon = document.getElementById("alert-icon")
     let localCart = window.localStorage.getItem('cart');
     if(localCart){
       let cart = JSON.parse(localCart);
-      console.log(cart)
-
-      if(cart.length == 0 && alertIcon){
-        alertIcon.classList.remove("mat-badge")
-      }
-    }else if(alertIcon){
-      alertIcon.classList.remove("mat-badge")
+      this.notificacao(cart);
     }
   }
 

@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ViewCenterComponent } from './components/view-center/view-center.component';
 import { RegisterUserComponent } from './views/register-user/register-user.component';
 import { ProductComponent } from './views/product/product.component';
+import { EditUserComponent } from './views/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ProductComponent } from './views/product/product.component';
     CartComponent,
     ViewCenterComponent,
     RegisterUserComponent,
-    ProductComponent
+    ProductComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
