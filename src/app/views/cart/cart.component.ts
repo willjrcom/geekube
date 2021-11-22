@@ -16,7 +16,7 @@ export class CartComponent implements OnInit {
 
   produtos = [{nome: 0, quantidade: 0, tamanho: 0, modelo: 0, preco: 0, id: 0}];
 
-  async finalizarPedido() {
+  finalizarPedido() {
     if(!this.concordar){
       alert("É necessário aceitar com os termos!");
       return;
@@ -24,11 +24,51 @@ export class CartComponent implements OnInit {
 
     const confirma = confirm("Deseja finalizar seu pedido?");
     
-    if(confirma){
-      window.localStorage.setItem('cart', '[]');
-      this.produtos = [];
-      window.location.href = "/";
+    if(!confirma){
+      return;
     }
+
+    let cart, auth;
+    let localCart = window.localStorage.getItem('cart');
+
+    if (localCart){
+      cart = JSON.parse(localCart);
+    }
+    
+    let locaAuth = window.localStorage.getItem('auth');
+
+    if (locaAuth){
+      auth = JSON.parse(locaAuth);
+    }
+
+    for(let product of cart){
+      delete product["imagem"]
+      delete product["descricao"]
+    }
+
+    let data = {
+      id: null,
+      usuario: auth["usuario"],
+      cart,
+      total_pedido: this.total_pedido,
+      qtd_total: this.qtd_total,
+      date: new Date()
+    }
+
+    fetch(`http://localhost:3001/history`, { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        window.localStorage.setItem('cart', '[]');
+        this.produtos = [];
+        window.location.href = "/";
+      })
+
   }
   
   removerProduto($event:any){
@@ -66,6 +106,7 @@ export class CartComponent implements OnInit {
         }
       }
     }
+    this.total_pedido = Number(this.total_pedido.toFixed(2));
   }
 
 }

@@ -35,6 +35,54 @@
       "usuario": "admin",
       "senha": "admin",
       "endereco": "Rua Luiz Silveira 625"
+    },
+    {
+      "id": 2,
+      "nome": "Joao",
+      "usuario": "joao",
+      "senha": "1234",
+      "endereco": "Rua do joao 1234"
+    },
+    {
+      "id": 3,
+      "nome": "Eike",
+      "usuario": "eike",
+      "senha": "1234",
+      "endereco": "Rua 1234"
+    }
+  ],
+  "history": [
+    {
+      "id": 1,
+      "usuario": "eike",
+      "cart": [
+        {
+          "id": "h5bfEHUI70",
+          "nome": "Box Básica",
+          "preco": "69.99",
+          "modelo": "masculino",
+          "quantidade": 2,
+          "tamanho": "m"
+        }
+      ],
+      "total_pedido": 139.98,
+      "qtd_total": 1
+    },
+    {
+      "id": 2,
+      "usuario": "eike",
+      "cart": [
+        {
+          "id": "MAxhhyKhFr",
+          "nome": "Box Padrão",
+          "preco": "89.99",
+          "modelo": "masculino",
+          "quantidade": 1,
+          "tamanho": "p"
+        }
+      ],
+      "total_pedido": 89.99,
+      "qtd_total": 1
     }
   ]
 }

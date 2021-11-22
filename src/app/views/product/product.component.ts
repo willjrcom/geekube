@@ -76,7 +76,7 @@ export class ProductComponent implements OnInit {
     }
     cart.push(this.product)
     window.localStorage.setItem('cart', JSON.stringify(cart));
-    window.location.href = "/";
+    window.location.href = "/cart";
   }
 
   generateSerial() {

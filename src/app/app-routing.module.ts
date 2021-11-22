@@ -1,3 +1,4 @@
+import { HistoryComponent } from './views/history/history.component';
 import { EditUserComponent } from './views/edit-user/edit-user.component';
 import { ProductComponent } from './views/product/product.component';
 import { RegisterUserComponent } from './views/register-user/register-user.component';
@@ -40,6 +41,10 @@ const routes: Routes = [
 {
   path: 'cart',
   component: CartComponent
+},
+{
+  path: 'history',
+  component: HistoryComponent
 }
 ];
 

@@ -14,11 +14,16 @@
                 <i class="material-icons text-dark icon-navbar">shopping_cart</i>
             </span>
         </a>
+
         <a routerLink="/center" class="m-2" *ngIf="!auth">
             <i class="material-icons text-dark icon-navbar">account_circle</i>
         </a>
         <a routerLink="/center/edit" class="m-2" *ngIf="auth">
             <i class="material-icons text-dark icon-navbar">edit</i>
+        </a>
+
+        <a routerLink="/history" class="m-2" *ngIf="auth">
+            <i class="material-icons text-dark icon-navbar">history</i>
         </a>
 
         <a *ngIf="auth" class="btn btn-link" (click)="logout()"><i class="material-icons text-dark">logout</i></a>

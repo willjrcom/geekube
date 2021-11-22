@@ -1,0 +1,30 @@
+<div class="container bg-light">
+    <div class="bg-light text-dark p-4">
+        <h1 align="center">Histórico</h1>
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-md-2">Código</th>
+                        <th class="col-md-2">Pedido</th>
+                        <th class="col-md-4">Itens</th>
+                        <th class="col-md-1">Total</th>
+                        <th class="col-md-1">Qtd</th>
+                        <th class="col-md-2">Devolução</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pedido of pedidos; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ pedido["usuario"] }}</td>
+                        <td>{{ pedido["cart"] }}</td>
+                        <td>R$ {{ pedido["total_pedido"] }}</td>
+                        <td>{{ pedido["qtd_total"] }}</td>
+                        <td><button value="{{ pedido['id'] }}" class="btn btn-warning" (click)="devolverPedido($event)">Devolver</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
