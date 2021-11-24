@@ -7,8 +7,13 @@
     </div>
     <br>
     <div>
+        <label>CPF</label>
+        <input [(ngModel)]="cpf" class="form-control" placeholder="Digite seu cpf" />
+    </div>
+    <br>
+    <div>
         <label>E-mail</label>
-        <input [(ngModel)]="usuario" class="form-control" placeholder="Digite seu e-mail" />
+        <input [(ngModel)]="email" class="form-control" placeholder="Digite seu e-mail" />
     </div>
     <br>
 
@@ -17,11 +22,6 @@
         <input [(ngModel)]="senha" class="form-control" placeholder="Digite sua senha" type="password" />
     </div>
 
-    <br>
-    <div>
-        <label>Endereço</label>
-        <input [(ngModel)]="endereco" class="form-control" placeholder="Digite seu endereço" />
-    </div>
     <br>
 
     <button class="btn btn-success" (click)="criarUsuario()">Cadastrar</button>

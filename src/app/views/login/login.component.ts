@@ -10,8 +10,18 @@ export class LoginComponent implements OnInit {
   user = ""
   password = ""
   
-  fazerLogin() {
-    const auth = fetch(`http://localhost:3001/users?usuario=${this.user}&senha=${this.password}`, { method: 'GET'})
+  fazerLogin() {   
+    let user: Object = {
+      email: this.user,
+      senha: this.password
+    }
+    const auth = fetch(`https://gk-user.herokuapp.com/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(user)
+      })
       .then(response => response.json())
       .then(data => {
         if(Array.isArray(data)){

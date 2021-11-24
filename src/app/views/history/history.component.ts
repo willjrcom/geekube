@@ -16,7 +16,7 @@ export class HistoryComponent implements OnInit {
       auth = JSON.parse(localAuth);
     }
     
-    await fetch("http://localhost:3001/history?usuario=" + auth["usuario"])
+    await fetch("https://gk-order.herokuapp.com/usuario?usuario=" + auth["usuario"])
       .then(response => response.json())
       .then(data => this.pedidos = data)
       .catch(error => alert("Erro na requisição: " + error));
@@ -37,16 +37,13 @@ export class HistoryComponent implements OnInit {
 
   async devolverPedido($event:any) {
     let id = $event.target.value;
-    const formData = new FormData();
-    formData.append('id', id);
 
-    await fetch("http://localhost:3001/history/" + id, {
+    await fetch("https://gk-order.herokuapp.com/devolucao/" + id, {
       method: 'DELETE'
     })
       .then(response => response.json())
+      .then(data => window.location.reload())
       .catch(error => alert("Erro na requisição: " + error));
-    
-    window.location.reload()
   }
 
   constructor() { }

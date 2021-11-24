@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class EditUserComponent implements OnInit {
   id = "";
   nome = "";
-  usuario = "";
+  email = "";
   senha = "";
   endereco = "";
 
@@ -16,12 +16,12 @@ export class EditUserComponent implements OnInit {
     let editarUsuario = {
       id: this.id,
       nome: this.nome,
-      usuario: this.usuario,
+      email: this.email,
       senha: this.senha,
       endereco: this.endereco
     }
     console.log(editarUsuario)
-    fetch(`http://localhost:3001/users/${this.id}`, { 
+    fetch(`https://gk-user.herokuapp.com/user?email=${this.email}`, { 
       method: 'put',
       headers: {
         'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export class EditUserComponent implements OnInit {
     if(auth){
       const user = JSON.parse(auth);
       this.nome = user["nome"];
-      this.usuario = user["usuario"];
+      this.email = user["email"];
       this.senha = user["senha"];
       this.id = user["id"];
       this.endereco = user["endereco"];

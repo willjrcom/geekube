@@ -7,20 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterUserComponent implements OnInit {
   nome = "";
-  usuario = "";
+  idade = 0;
+  email = "";
+  cpf = "";
   senha = "";
   endereco = "";
 
   criarUsuario() {
     let novoUsuario = {
-      id: null,
       nome: this.nome,
-      usuario: this.usuario,
+      cpf: this.cpf,
+      email: this.email,
       senha: this.senha,
-      endereco: this.endereco
     }
 
-    fetch(`http://localhost:3001/users`, { 
+    fetch(`https://gk-user.herokuapp.com/user`, { 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -83,6 +83,40 @@
       ],
       "total_pedido": 89.99,
       "qtd_total": 1
+    },
+    {
+      "id": 3,
+      "usuario": "admin",
+      "cart": [
+        {
+          "id": "8hlPBUBdnh",
+          "nome": "Box Premium",
+          "preco": "109.99",
+          "modelo": "masculino",
+          "quantidade": 1,
+          "tamanho": "m"
+        }
+      ],
+      "total_pedido": 109.99,
+      "qtd_total": 1,
+      "date": "2021-11-22T22:53:34.028Z"
+    },
+    {
+      "id": 4,
+      "usuario": "admin",
+      "cart": [
+        {
+          "id": "kF4zZeAzl2",
+          "nome": "Box Padrão",
+          "preco": "89.99",
+          "modelo": "masculino",
+          "quantidade": 1,
+          "tamanho": "g"
+        }
+      ],
+      "total_pedido": 89.99,
+      "qtd_total": 1,
+      "date": "2021-11-22T23:31:07.080Z"
     }
   ]
 }

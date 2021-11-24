@@ -28,11 +28,11 @@ export class CartComponent implements OnInit {
       return;
     }
 
-    let cart, auth;
+    let carrinho, auth;
     let localCart = window.localStorage.getItem('cart');
 
     if (localCart){
-      cart = JSON.parse(localCart);
+      carrinho = JSON.parse(localCart);
     }
     
     let locaAuth = window.localStorage.getItem('auth');
@@ -41,21 +41,22 @@ export class CartComponent implements OnInit {
       auth = JSON.parse(locaAuth);
     }
 
-    for(let product of cart){
+    for(let product of carrinho){
       delete product["imagem"]
       delete product["descricao"]
     }
 
     let data = {
       id: null,
-      usuario: auth["usuario"],
-      cart,
-      total_pedido: this.total_pedido,
-      qtd_total: this.qtd_total,
-      date: new Date()
+      email: auth["email"],
+      carrinho: JSON.stringify(carrinho),
+      totalPedido: this.total_pedido,
+      quantidade: this.qtd_total,
+      dataEntrega: new Date(),
+      localEntrega: "Endereco tudo junto",
     }
 
-    fetch(`http://localhost:3001/history`, { 
+    fetch(`https://gk-order.herokuapp.com/`, { 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

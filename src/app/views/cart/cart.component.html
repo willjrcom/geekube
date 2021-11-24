@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                         <tr *ngIf="carrinho_vazio">
-                            <th colspan="6">Nenhum produto adicionado!</th>
+                            <th colspan="6" class="text-center"><b>Nenhum produto adicionado!</b></th>
                         </tr>
                         <tr *ngFor="let produto of produtos">
                             <td>{{ produto.nome }}</td>

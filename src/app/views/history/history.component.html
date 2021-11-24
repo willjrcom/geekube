@@ -15,6 +15,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr *ngIf="pedidos.length == 0">
+                        <td colspan="6" class="text-center"><b>Nenhum pedido encontrado!</b></td>
+                    </tr>
                     <tr *ngFor="let pedido of pedidos; let i = index">
                         <td>{{ i + 1 }}</td>
                         <td>{{ pedido["usuario"] }}</td>
