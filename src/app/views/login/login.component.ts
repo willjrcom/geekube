@@ -11,15 +11,17 @@ export class LoginComponent implements OnInit {
   password = ""
   
   fazerLogin() {   
-    let user: Object = {
+    let user = {
       email: this.user,
       senha: this.password
     }
-    const auth = fetch(`https://gk-user.herokuapp.com/login`, {
+
+    fetch(`https://gk-user.herokuapp.com/user/login`, {
       method: 'POST',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }, 
+      },
       body: JSON.stringify(user)
       })
       .then(response => response.json())
@@ -36,8 +38,7 @@ export class LoginComponent implements OnInit {
         catch(e){
           alert("Erro ao realizar login!")
         }
-      })
-      .catch(error => alert("Erro na requisição: " + error));
+      });
   }
 
   constructor() { }

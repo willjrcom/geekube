@@ -38,10 +38,22 @@
                         <div class="col">
                             <label><b>Endereço de entrega</b></label>
                         </div>
-                        <div align="right" class="col">
-                            <button class="btn btn-sm btn-link" routerLink="/center/edit">Alterar</button>
+                        <div>&nbsp;</div>
+
+                        <div class="col-md-8">
+                            <label><b>Rua</b></label>
+                            <input [(ngModel)]="rua" class="form-control" />
                         </div>
-                        <p>{{ endereco }}</p>
+                        <div class="col-md-4">
+                            <label><b>Número</b></label>
+                            <input [(ngModel)]="numero" class="form-control" />
+                        </div>
+                        <div>&nbsp;</div>
+
+                        <div class="col">
+                            <label><b>Cidade</b></label>
+                            <input [(ngModel)]="cidade" class="form-control" />
+                        </div>
                     </div>
                     <br>
 
@@ -49,10 +61,20 @@
                         <div class="col">
                             <label><b>Forma de pagamento</b></label>
                         </div>
-                        <div align="right" class="col">
-                            <button class="btn btn-sm btn-link" routerLink="/center/edit">Alterar</button>
+
+                        <select [(ngModel)]="formaPagamento" class="form-control">
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="cartao">Cartão</option>
+                        </select>
+
+                        <div>&nbsp;</div>
+                        <div *ngIf="formaPagamento == 'dinheiro'">
+                            <label><b>Dinheiro</b></label>
                         </div>
-                        <p>{{ pagamento }}</p>
+                        <div *ngIf="formaPagamento == 'cartao'">
+                            <label><b>Cartão</b></label>
+                        </div>
+                        <input [(ngModel)]="pagamento" class="form-control" />
                     </div>
                 </div>
                 <hr>

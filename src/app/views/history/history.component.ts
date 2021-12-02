@@ -16,10 +16,9 @@ export class HistoryComponent implements OnInit {
       auth = JSON.parse(localAuth);
     }
     
-    await fetch("https://gk-order.herokuapp.com/usuario?usuario=" + auth["usuario"])
+    await fetch("https://gk-order.herokuapp.com/usuario?usuario=" + auth["email"])
       .then(response => response.json())
-      .then(data => this.pedidos = data)
-      .catch(error => alert("Erro na requisição: " + error));
+      .then(data => this.pedidos = data);
     
     for(let pedido of this.pedidos){
       console.log(pedido)

@@ -1,3 +1,4 @@
+import { StatisticComponent } from './views/statistic/statistic.component';
 import { HistoryComponent } from './views/history/history.component';
 import { EditUserComponent } from './views/edit-user/edit-user.component';
 import { ProductComponent } from './views/product/product.component';
@@ -45,7 +46,7 @@ const routes: Routes = [
 {
   path: 'history',
   component: HistoryComponent
-}
+},
 ];
 
 @NgModule({

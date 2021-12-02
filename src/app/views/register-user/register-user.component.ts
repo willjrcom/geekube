@@ -20,17 +20,16 @@ export class RegisterUserComponent implements OnInit {
       email: this.email,
       senha: this.senha,
     }
-
+    
     fetch(`https://gk-user.herokuapp.com/user`, { 
-      method: 'POST',
+      method: 'POST',  
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }, 
+      },
       body: JSON.stringify(novoUsuario)
       })
-      .then(response => response.json())
       .then(data => window.location.href="/center")
-      .catch(error => alert("Erro na requisição: " + error));
   }
   constructor() { }
 

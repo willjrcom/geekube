@@ -24,8 +24,9 @@ export class EditUserComponent implements OnInit {
     fetch(`https://gk-user.herokuapp.com/user?email=${this.email}`, { 
       method: 'put',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }, 
+      },
       body: JSON.stringify(editarUsuario)
       })
       .then(response => response.json())

@@ -9,8 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class CartComponent implements OnInit {
   qtd_total = 0;
   total_pedido = 0;
-  endereco: any = "...";
-  pagamento = "8584 9675 2356 4589";
+  rua = "";
+  numero = "";
+  cidade = "";
+  endereco = `${this.rua} ${this.numero} - ${this.cidade}`;
+  formaPagamento = "cartao";
+  pagamento = "";
   concordar = false;
   carrinho_vazio = false;
 
@@ -47,20 +51,20 @@ export class CartComponent implements OnInit {
     }
 
     let data = {
-      id: null,
       email: auth["email"],
       carrinho: JSON.stringify(carrinho),
       totalPedido: this.total_pedido,
       quantidade: this.qtd_total,
       dataEntrega: new Date(),
-      localEntrega: "Endereco tudo junto",
+      localEntrega: this.endereco,
     }
-
+    console.log(data)
     fetch(`https://gk-order.herokuapp.com/`, { 
       method: 'POST',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }, 
+      },
       body: JSON.stringify(data)
       })
       .then(response => response.json())
@@ -69,7 +73,6 @@ export class CartComponent implements OnInit {
         this.produtos = [];
         window.location.href = "/";
       })
-
   }
   
   removerProduto($event:any){

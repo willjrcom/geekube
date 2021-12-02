@@ -26,6 +26,7 @@ import { RegisterUserComponent } from './views/register-user/register-user.compo
 import { ProductComponent } from './views/product/product.component';
 import { EditUserComponent } from './views/edit-user/edit-user.component';
 import { HistoryComponent } from './views/history/history.component';
+import { StatisticComponent } from './views/statistic/statistic.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HistoryComponent } from './views/history/history.component';
     RegisterUserComponent,
     ProductComponent,
     EditUserComponent,
-    HistoryComponent
+    HistoryComponent,
+    StatisticComponent
   ],
   imports: [
     BrowserModule,
