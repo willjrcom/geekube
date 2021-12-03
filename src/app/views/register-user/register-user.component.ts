@@ -11,7 +11,6 @@ export class RegisterUserComponent implements OnInit {
   email = "";
   cpf = "";
   senha = "";
-  endereco = "";
 
   criarUsuario() {
     let novoUsuario = {

@@ -20,6 +20,7 @@ export class ProductComponent implements OnInit {
   }
   cartao = faIdCard
 
+  //carrinho: nome, preco, modelo, quantidade, tamanho: PMG
   getParameterByName(name: any, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
     var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),

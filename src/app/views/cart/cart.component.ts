@@ -12,7 +12,6 @@ export class CartComponent implements OnInit {
   rua = "";
   numero = "";
   cidade = "";
-  endereco = `${this.rua} ${this.numero} - ${this.cidade}`;
   formaPagamento = "cartao";
   pagamento = "";
   concordar = false;
@@ -44,22 +43,29 @@ export class CartComponent implements OnInit {
     if (locaAuth){
       auth = JSON.parse(locaAuth);
     }
-
+    
     for(let product of carrinho){
       delete product["imagem"]
       delete product["descricao"]
+      delete product["id"]
     }
+    var date = new Date();
+
+    // add a day
+    date.setDate(date.getDate() + 2);
 
     let data = {
       email: auth["email"],
-      carrinho: JSON.stringify(carrinho),
+      carrinho,
       totalPedido: this.total_pedido,
       quantidade: this.qtd_total,
-      dataEntrega: new Date(),
-      localEntrega: this.endereco,
+      momento: new Date(),
+      dataEntrega: date,
+      localEntrega: `${this.rua} ${this.numero} - ${this.cidade}`,
     }
-    console.log(data)
-    fetch(`https://gk-order.herokuapp.com/`, { 
+    
+    //carrinho: nome, preco, modelo, quantidade, tamanho: PMG
+    fetch(`https://gk-order.herokuapp.com/order/`, { 
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -67,7 +73,6 @@ export class CartComponent implements OnInit {
       },
       body: JSON.stringify(data)
       })
-      .then(response => response.json())
       .then(data => {
         window.localStorage.setItem('cart', '[]');
         this.produtos = [];
@@ -93,7 +98,6 @@ export class CartComponent implements OnInit {
     let localAuth = window.localStorage.getItem('auth');
     if(localAuth){
       const auth = JSON.parse(localAuth);
-      this.endereco = auth["endereco"]
     }
 
     let localCart = window.localStorage.getItem('cart');

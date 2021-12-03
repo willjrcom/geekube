@@ -6,7 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-  pedidos = []
+  pedidos = [{
+    id: "",
+    email: "",
+    carrinho: "",
+    totalPedido: "",
+    quantidade: "",
+    dataEntrega: "",
+    localEntrega: ""
+  }]
 
   async carregarHistorico() {
     let auth;
@@ -22,12 +30,12 @@ export class HistoryComponent implements OnInit {
     
     for(let pedido of this.pedidos){
       console.log(pedido)
-      let cart = Array(pedido["cart"])
+      let cart = Array(pedido["carrinho"])
       let content: String = "";
 
-      for(let product of Array(pedido["cart"])){
+      for(let product of Array(pedido["carrinho"])){
         for(let test of product){
-          content += `${test["quantidade"]} X ${test["nome"]} | `
+          content += test//`${test["quantidade"]} X ${test["nome"]} | `
         }
       }
       (pedido as any)["cart"] = content;
@@ -50,5 +58,25 @@ export class HistoryComponent implements OnInit {
   ngOnInit(): void {
     this.carregarHistorico()
   }
-
 }
+
+/*
+searchUserOnTelerisco(search: any) {
+  return this.http.get( environment.apiUrl + environment.serviceUrl + '/tr/contato-pessoa-fisica', {
+    params: search
+  }).pipe(map(data => {
+    return data;
+  }));
+}
+
+getDuplicado(params) {
+  return this.http.get(environment.apiUrl + environment.serviceUrl + '/lead/duplicacao', {
+    params: params
+  });
+}
+
+isPermitidoDuplicacao(lead: any) {
+  return this.http.post<LeadDuplicidade>(environment.apiUrl + environment.serviceUrl + '/lead/duplicacao/permissao', lead, {
+  });
+}
+*/
