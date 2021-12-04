@@ -11,9 +11,14 @@ export class CartComponent implements OnInit {
   totalPedido = 0;
   rua = "";
   numero = "";
+  cep = "";
+  bairro = ""
   cidade = "";
-  formaPagamento = "cartao";
-  pagamento = "";
+  estado = "";
+  complemento = "";
+  qtdParcelas = 1;
+
+  formaPagamento = "";
   concordar = false;
   carrinhoVazio = false;
 
@@ -27,12 +32,16 @@ export class CartComponent implements OnInit {
 
     if (this.rua == ""
         || this.numero == ""
+        || this.bairro == ""
         || this.cidade == ""
-        || this.pagamento == ""
+        || this.estado == ""
+        || this.cep == ""
+        || this.formaPagamento == ""
         ) {
       alert("Existem campos em branco!")
       return
     }
+
     const confirma = confirm("Deseja finalizar seu pedido?");
     
     if(!confirma){
@@ -63,13 +72,14 @@ export class CartComponent implements OnInit {
     date.setDate(date.getDate() + Math.floor(Math.random() * (10 - 2)) + 2);
 
     let data = {
+      nomeUsuario: auth["nome"],
       email: auth["email"],
       carrinho,
       totalPedido: this.totalPedido,
       quantidade: this.qtdTotal,
       momento: new Date(),
       dataEntrega: date,
-      localEntrega: `${this.rua} ${this.numero} - ${this.cidade}`,
+      localEntrega: `${this.rua} ${this.numero}, ${this.complemento} - ${this.bairro}, ${this.cidade}, ${this.estado}, CEP: ${this.cep}`,
     }
 
     //carrinho: nome, preco, modelo, quantidade, tamanho: PMG
@@ -84,12 +94,39 @@ export class CartComponent implements OnInit {
       .then(data => data)
     
     if (request.status >= 200 && request.status < 300) {
+      alert("Pedido concluído com sucesso!")
       window.localStorage.setItem('cart', '[]');
       this.produtos = [];
       window.location.href = "/";
     } else {
       console.log(request)
     }
+  }
+
+  carregarTotal(){
+    let localAuth = window.localStorage.getItem('auth');
+    if(localAuth){
+      const auth = JSON.parse(localAuth);
+    }
+
+    let localCart = window.localStorage.getItem('cart');
+    this.totalPedido = 0
+    this.qtdTotal = 0
+
+    if(localCart){
+      this.produtos = JSON.parse(localCart);
+
+      if(this.produtos.length == 0){
+        this.carrinhoVazio = true
+      }
+      else{
+        for(const produto of this.produtos){
+          this.totalPedido += Number(produto["preco"]) * Number(produto["quantidade"])
+          this.qtdTotal += produto["quantidade"]
+        }
+      }
+    }
+    this.totalPedido = Number(this.totalPedido.toFixed(2));
   }
   
   removerProduto($event:any){
@@ -103,30 +140,13 @@ export class CartComponent implements OnInit {
       HeaderComponent.prototype.notificacao(this.produtos)
       window.localStorage.setItem('cart', JSON.stringify(filter_cart));
     }
+    this.carregarTotal()
   }
+
   constructor() { }
 
   ngOnInit(): void {
-    let localAuth = window.localStorage.getItem('auth');
-    if(localAuth){
-      const auth = JSON.parse(localAuth);
-    }
-
-    let localCart = window.localStorage.getItem('cart');
-    if(localCart){
-      this.produtos = JSON.parse(localCart);
-      this.qtdTotal = this.produtos.length;
-
-      if(this.produtos.length == 0){
-        this.carrinhoVazio = true
-      }
-      else{
-        for(const produto of this.produtos){
-          this.totalPedido += Number(produto["preco"]) * Number(produto["quantidade"])
-        }
-      }
-    }
-    this.totalPedido = Number(this.totalPedido.toFixed(2));
+    this.carregarTotal()
   }
 
 }

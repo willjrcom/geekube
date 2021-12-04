@@ -30,9 +30,10 @@ export class LoginComponent implements OnInit {
     if(Array.isArray(data)){
       data = data[0];
     }
-        
+    
     try{
       data["nome"];
+      window.localStorage.removeItem("cart")
       window.localStorage.setItem('auth', JSON.stringify(data));
       window.location.href= "/";
     } catch(e) {

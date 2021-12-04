@@ -50,10 +50,33 @@
                         </div>
                         <div>&nbsp;</div>
 
-                        <div class="col">
+                        <div class="col-md-6">
+                            <label><b>Bairro</b></label>
+                            <input [(ngModel)]="bairro" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6">
                             <label><b>Cidade</b></label>
                             <input [(ngModel)]="cidade" class="form-control" />
                         </div>
+                        <div>&nbsp;</div>
+
+                        <div class="col-md-6">
+                            <label><b>UF</b></label>
+                            <input [(ngModel)]="estado" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label><b>CEP</b></label>
+                            <input [(ngModel)]="cep" class="form-control" />
+                        </div>
+                        <div>&nbsp;</div>
+
+                        <div class="col">
+                            <label><b>Complemento</b></label>
+                            <input [(ngModel)]="complemento" class="form-control" />
+                        </div>
+
                     </div>
                     <br>
 
@@ -63,18 +86,14 @@
                         </div>
 
                         <select [(ngModel)]="formaPagamento" class="form-control">
-                            <option value="dinheiro">Dinheiro</option>
-                            <option value="cartao">Cartão</option>
+                            <option value="debito">Cartão de debito</option>
+                            <option value="credito">Cartão de credito</option>
+                            <option value="boleto">Boleto</option>
+                            <option value="pix">Pix</option>
                         </select>
 
-                        <div>&nbsp;</div>
-                        <div *ngIf="formaPagamento == 'dinheiro'">
-                            <label><b>Dinheiro</b></label>
-                        </div>
-                        <div *ngIf="formaPagamento == 'cartao'">
-                            <label><b>Cartão</b></label>
-                        </div>
-                        <input [(ngModel)]="pagamento" class="form-control" />
+                        <br><br>
+                        <input class="form-control" placeholder="Quantidade de parcelas" type="number" *ngIf="formaPagamento == 'debito' || formaPagamento == 'credito'" />
                     </div>
                 </div>
                 <hr>
