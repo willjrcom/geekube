@@ -101,7 +101,6 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     const n = this.getParameterByName('box');
     var data = this.getBox(n).then(response => {
-      console.log(response);
       this.product.nome = response["nome"]
       this.product.preco = response["preco"]
       this.product.descricao = response["descricao"]

@@ -9,48 +9,44 @@ export class HistoryComponent implements OnInit {
   pedidos = [{
     id: "",
     email: "",
-    carrinho: "",
-    totalPedido: "",
-    quantidade: "",
+    carrinho: [],
+    status: "",
+    totalPedido: 0,
+    quantidade: 0,
     dataEntrega: "",
-    localEntrega: ""
+    localEntrega: "",
+    devolvido: false
   }]
 
   async carregarHistorico() {
     let auth;
     let localAuth = window.localStorage.getItem('auth');
 
-    if (localAuth){
+    if (localAuth) {
       auth = JSON.parse(localAuth);
     }
-    
-    await fetch("https://gk-order.herokuapp.com/usuario?usuario=" + auth["email"])
-      .then(response => response.json())
-      .then(data => this.pedidos = data);
-    
-    for(let pedido of this.pedidos){
-      console.log(pedido)
-      let cart = Array(pedido["carrinho"])
-      let content: String = "";
 
-      for(let product of Array(pedido["carrinho"])){
-        for(let test of product){
-          content += test//`${test["quantidade"]} X ${test["nome"]} | `
-        }
+    this.pedidos = await fetch("https://gk-order.herokuapp.com/order/usuario?email=" + auth["email"])
+      .then(response => response.json())
+
+    for (let pedido of this.pedidos) {
+      pedido["quantidade"] = Number(pedido["carrinho"].length)
+      if (!pedido["totalPedido"]) {
+        pedido["totalPedido"] = 0
       }
-      (pedido as any)["cart"] = content;
+      let novaData = new Date(pedido["dataEntrega"]);
+      pedido["dataEntrega"] = novaData.toLocaleDateString('pt-BR', {timeZone: 'UTC'});
     }
   }
 
-  async devolverPedido($event:any) {
+  async devolverPedido($event: any) {
     let id = $event.target.value;
 
-    await fetch("https://gk-order.herokuapp.com/devolucao/" + id, {
-      method: 'DELETE'
+    await fetch("https://gk-order.herokuapp.com/order/devolucao/" + id, {
+      method: 'PUT'
     })
-      .then(response => response.json())
-      .then(data => window.location.reload())
-      .catch(error => alert("Erro na requisição: " + error));
+      .then(response => console.log(response))
+      //.then(data => window.location.reload())
   }
 
   constructor() { }

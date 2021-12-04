@@ -7,8 +7,8 @@
                 <thead>
                     <tr>
                         <th class="col-md-2">Código</th>
-                        <th class="col-md-2">Pedido</th>
-                        <th class="col-md-4">Itens</th>
+                        <th class="col-md-2">Data entrega</th>
+                        <th class="col-md-2">Status</th>
                         <th class="col-md-1">Total</th>
                         <th class="col-md-1">Qtd</th>
                         <th class="col-md-2">Devolução</th>
@@ -20,11 +20,11 @@
                     </tr>
                     <tr *ngFor="let pedido of pedidos; let i = index">
                         <td>{{ i + 1 }}</td>
-                        <td>{{ pedido["email"] }}</td>
-                        <td>{{ pedido["carrinho"] }}</td>
+                        <td>{{ pedido["dataEntrega"] }}</td>
+                        <td>{{ pedido["status"] }}</td>
                         <td>R$ {{ pedido["totalPedido"] }}</td>
                         <td>{{ pedido["quantidade"] }}</td>
-                        <td><button value="{{ pedido['id'] }}" class="btn btn-warning" (click)="devolverPedido($event)">Devolver</button></td>
+                        <td><button value="{{ pedido['id'] }}" class="btn btn-warning" (click)="devolverPedido($event)" [disabled]="pedido['status'] == 'DEVOLVIDO'">Devolver</button></td>
                     </tr>
                 </tbody>
             </table>

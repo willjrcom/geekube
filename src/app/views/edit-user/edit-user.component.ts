@@ -10,24 +10,41 @@ export class EditUserComponent implements OnInit {
   nome = "";
   email = "";
   senha = "";
+  telefone = "";
 
-  editarUsuario() {
-    let editarUsuario = {
-      id: this.id,
+  async editarUsuario() {
+    let data = {
       nome: this.nome,
       email: this.email,
       senha: this.senha,
+      telefone: this.telefone
     }
-    
-    fetch(`https://gk-user.herokuapp.com/user?email=${this.email}`, { 
+
+    if (this.senha === "") {
+      alert("Campo senha vazio!")
+      return
+    }
+
+    if (this.senha.length < 4) {
+      alert("Senha minima: 4 caracteres!")
+      return
+    }
+
+    const request = await fetch(`https://gk-user.herokuapp.com/user?email=${this.email}`, { 
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(editarUsuario)
+      body: JSON.stringify(data)
       })
-      .then(data => window.location.href = "/")
+      .then(data => data)
+
+      console.log(request)
+    if (request.status >= 200 && request.status < 300) {
+      window.localStorage.setItem('auth', JSON.stringify(data));
+      window.location.reload()
+    }
   }
 
   constructor() { }
@@ -38,7 +55,7 @@ export class EditUserComponent implements OnInit {
       const user = JSON.parse(auth);
       this.nome = user["nome"];
       this.email = user["email"];
-      this.id = user["id"];
+      this.telefone = user["telefone"];
     }
   }
 

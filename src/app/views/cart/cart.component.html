@@ -16,7 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngIf="carrinho_vazio">
+                        <tr *ngIf="carrinhoVazio">
                             <th colspan="6" class="text-center"><b>Nenhum produto adicionado!</b></th>
                         </tr>
                         <tr *ngFor="let produto of produtos">
@@ -80,9 +80,9 @@
                 <hr>
                 <br>
 
-                <label><b>Quantidade de itens:</b> {{ qtd_total }}</label>
+                <label><b>Quantidade de itens:</b> {{ qtdTotal }}</label>
                 <br>
-                <label><b>Total do pedido:</b> R$ {{ total_pedido }}</label>
+                <label><b>Total do pedido:</b> R$ {{ totalPedido }}</label>
                 <br><br>
 
                 <input type="checkbox" [(ngModel)]="concordar" class="form-check-input" />

@@ -7,24 +7,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  qtd_total = 0;
-  total_pedido = 0;
+  qtdTotal = 0;
+  totalPedido = 0;
   rua = "";
   numero = "";
   cidade = "";
   formaPagamento = "cartao";
   pagamento = "";
   concordar = false;
-  carrinho_vazio = false;
+  carrinhoVazio = false;
 
   produtos = [{nome: 0, quantidade: 0, tamanho: 0, modelo: 0, preco: 0, id: 0}];
 
-  finalizarPedido() {
+  async finalizarPedido() {
     if(!this.concordar){
       alert("É necessário aceitar com os termos!");
       return;
     }
 
+    if (this.rua == ""
+        || this.numero == ""
+        || this.cidade == ""
+        || this.pagamento == ""
+        ) {
+      alert("Existem campos em branco!")
+      return
+    }
     const confirma = confirm("Deseja finalizar seu pedido?");
     
     if(!confirma){
@@ -52,20 +60,20 @@ export class CartComponent implements OnInit {
     var date = new Date();
 
     // add a day
-    date.setDate(date.getDate() + 2);
+    date.setDate(date.getDate() + Math.floor(Math.random() * (10 - 2)) + 2);
 
     let data = {
       email: auth["email"],
       carrinho,
-      totalPedido: this.total_pedido,
-      quantidade: this.qtd_total,
+      totalPedido: this.totalPedido,
+      quantidade: this.qtdTotal,
       momento: new Date(),
       dataEntrega: date,
       localEntrega: `${this.rua} ${this.numero} - ${this.cidade}`,
     }
-    
+
     //carrinho: nome, preco, modelo, quantidade, tamanho: PMG
-    fetch(`https://gk-order.herokuapp.com/order/`, { 
+    const request = await fetch(`https://gk-order.herokuapp.com/order/`, { 
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -73,11 +81,15 @@ export class CartComponent implements OnInit {
       },
       body: JSON.stringify(data)
       })
-      .then(data => {
-        window.localStorage.setItem('cart', '[]');
-        this.produtos = [];
-        window.location.href = "/";
-      })
+      .then(data => data)
+    
+    if (request.status >= 200 && request.status < 300) {
+      window.localStorage.setItem('cart', '[]');
+      this.produtos = [];
+      window.location.href = "/";
+    } else {
+      console.log(request)
+    }
   }
   
   removerProduto($event:any){
@@ -103,18 +115,18 @@ export class CartComponent implements OnInit {
     let localCart = window.localStorage.getItem('cart');
     if(localCart){
       this.produtos = JSON.parse(localCart);
-      this.qtd_total = this.produtos.length;
+      this.qtdTotal = this.produtos.length;
 
       if(this.produtos.length == 0){
-        this.carrinho_vazio = true
+        this.carrinhoVazio = true
       }
       else{
         for(const produto of this.produtos){
-          this.total_pedido += Number(produto["preco"]) * Number(produto["quantidade"])
+          this.totalPedido += Number(produto["preco"]) * Number(produto["quantidade"])
         }
       }
     }
-    this.total_pedido = Number(this.total_pedido.toFixed(2));
+    this.totalPedido = Number(this.totalPedido.toFixed(2));
   }
 
 }
