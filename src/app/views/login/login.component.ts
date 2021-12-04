@@ -10,13 +10,13 @@ export class LoginComponent implements OnInit {
   user = ""
   password = ""
   
-  fazerLogin() {   
+  async fazerLogin() {   
     let user = {
       email: this.user,
       senha: this.password
     }
 
-    fetch(`https://gk-user.herokuapp.com/user/login`, {
+    const request = await fetch(`https://gk-user.herokuapp.com/user/login`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -24,21 +24,20 @@ export class LoginComponent implements OnInit {
       },
       body: JSON.stringify(user)
       })
-      .then(response => response.json())
-      .then(data => {
-        if(Array.isArray(data)){
-          data = data[0];
-        }
+      .then(response => response)
+    var data = await request.json().then(data => data)
+    
+    if(Array.isArray(data)){
+      data = data[0];
+    }
         
-        try{
-          data["nome"];
-          window.localStorage.setItem('auth', JSON.stringify(data));
-          window.location.href= "/";
-        }
-        catch(e){
-          alert("Erro ao realizar login!")
-        }
-      });
+    try{
+      data["nome"];
+      window.localStorage.setItem('auth', JSON.stringify(data));
+      window.location.href= "/";
+    } catch(e) {
+      alert("Erro ao realizar login!")
+    }
   }
 
   constructor() { }

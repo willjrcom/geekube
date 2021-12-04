@@ -11,10 +11,17 @@ export class EditUserComponent implements OnInit {
   email = "";
   senha = "";
   telefone = "";
-
+  cpf = "";
+  auth: object = {
+    email: 0,
+  }
   async editarUsuario() {
-    let data = {
-      nome: this.nome,
+    let auth = window.localStorage.getItem('auth');
+    if (auth){
+      var emailSalvo = JSON.parse(auth)["email"]
+    }
+
+    let dataEdit = {
       email: this.email,
       senha: this.senha,
       telefone: this.telefone
@@ -29,20 +36,26 @@ export class EditUserComponent implements OnInit {
       alert("Senha minima: 4 caracteres!")
       return
     }
-
-    const request = await fetch(`https://gk-user.herokuapp.com/user?email=${this.email}`, { 
+    // Get default data
+    const userData = await fetch(`https://gk-user.herokuapp.com/user/email?email=${emailSalvo}`)
+    .then(data => data.json())
+    .then(data => data)
+    
+    // Set new data
+    const request = await fetch(`https://gk-user.herokuapp.com/user?email=${emailSalvo}`, { 
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(dataEdit)
       })
       .then(data => data)
 
-      console.log(request)
+    console.log(request)
     if (request.status >= 200 && request.status < 300) {
-      window.localStorage.setItem('auth', JSON.stringify(data));
+      let newUser = {...userData, ...dataEdit}
+      window.localStorage.setItem('auth', JSON.stringify(newUser));
       window.location.reload()
     }
   }
@@ -56,6 +69,7 @@ export class EditUserComponent implements OnInit {
       this.nome = user["nome"];
       this.email = user["email"];
       this.telefone = user["telefone"];
+      this.cpf = user["cpf"]
     }
   }
 
